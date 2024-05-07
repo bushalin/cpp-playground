@@ -5,8 +5,15 @@ project(OpenCVExample VERSION 1.0)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -std=c++17 -pthread -lstdc++fs -O3 -fPIC -rdynamic")
 
+# Set up project variable if not defined
+if (NOT DEFINED APP_NAME OR NOT DEFINED BUILD_TARGET)
+    set(APP_NAME AWL_ENGINE_AGENT)
+    set(UNIVERSAL_ASYNC_APP UNIVERSAL_ASYNC_EXECUTABLE)
+    set(BUILD_TARGET ${CMAKE_SYSTEM_PROCESSOR})
+endif()
+
 # Set up directory variables
-set(LIBS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs)
+set(LIBS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/${BUILD_TARGET})
 message(STATUS "LIBS_DIR: ${LIBS_DIR}")
 set(INCLUDE_DIR ${LIBS_DIR}/include)
 message(STATUS "INCLUDE_DIR: ${INCLUDE_DIR}")
